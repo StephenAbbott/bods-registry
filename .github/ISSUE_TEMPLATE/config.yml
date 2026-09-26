@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Propose a change to BODS itself
+    url: https://github.com/openownership/data-standard/issues/new/choose
+    about: Feature requests and bug reports for the standard go to Open Ownership's repository, not here.

@@ -1,0 +1,4 @@
+code,title,description,technical note
+active,Active,"The entity is active according to the extension's source.",
+dormant,Dormant,"The entity exists but is recorded as dormant by the extension's source.",
+unknown,Unknown,"The extension's source does not record a status.",

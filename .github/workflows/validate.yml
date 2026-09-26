@@ -1,0 +1,37 @@
+name: Validate registry
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check out the BODS 0.4 schema (openownership/data-standard, branch 0.4.0)
+        uses: actions/checkout@v4
+        with:
+          repository: openownership/data-standard
+          ref: 0.4.0
+          path: bods-0.4
+          sparse-checkout: schema
+          sparse-checkout-cone-mode: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Validate registry, extensions, profiles and learnings
+        run: python scripts/validate.py --bods-schema bods-0.4/schema

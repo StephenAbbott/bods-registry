@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/StephenAbbott/bods-registry/extensions/extension.schema.json",
+  "title": "BODS extension metadata",
+  "description": "Metadata file (extension.json) that every BODS extension carries at its root. Fields mirror the entries in extensions/registry.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["slug", "name", "description", "maintainer", "bods_versions", "category", "status", "documentation_url"],
+  "properties": {
+    "slug": {
+      "type": "string",
+      "description": "Stable identifier for the extension: lower-case letters, digits and hyphens.",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 3,
+      "maxLength": 100
+    },
+    "description": {
+      "type": "string",
+      "description": "One or two sentences on what the extension adds and why.",
+      "minLength": 20,
+      "maxLength": 600
+    },
+    "maintainer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "minLength": 2 },
+        "url": { "type": "string", "format": "uri" },
+        "email": { "type": "string", "format": "email" }
+      }
+    },
+    "documentation_url": {
+      "type": "string",
+      "format": "uri",
+      "description": "Where a human should start reading."
+    },
+    "repository_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "bods_versions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+$" },
+      "description": "BODS versions the schema patches were written against."
+    },
+    "category": {
+      "type": "string",
+      "enum": ["assets", "documents", "projects", "payments", "sanctions", "agents", "political-exposure", "procurement", "verification", "identifiers", "other"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "community", "deprecated"]
+    },
+    "dependencies": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+      "default": []
+    },
+    "schemas": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "Which BODS schema files this extension patches (files under schema/ in the extension).",
+      "items": {
+        "type": "string",
+        "enum": ["statement.json", "components.json", "entity-record.json", "person-record.json", "relationship-record.json"]
+      }
+    },
+    "codelists": {
+      "type": "array",
+      "uniqueItems": true,
+      "description": "Codelist files under codelists/ in the extension. A leading + marks additions to an existing open codelist.",
+      "items": { "type": "string", "pattern": "^\\+?[A-Za-z0-9]+\\.csv$" }
+    },
+    "version": {
+      "type": "string",
+      "description": "Version of the extension itself, if it is versioned separately."
+    },
+    "first_registered": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "properties": {
+    "templateExtension": {
+      "title": "Template extension",
+      "description": "Container for fields added by the template extension. Replace with your extension's namespace object.",
+      "type": "object",
+      "properties": {
+        "exampleStatus": {
+          "title": "Example status",
+          "description": "An illustrative status for this entity, using the exampleStatus codelist.",
+          "type": "string",
+          "codelist": "exampleStatus.csv",
+          "openCodelist": false,
+          "enum": ["active", "dormant", "unknown"]
+        },
+        "exampleNote": {
+          "title": "Example note",
+          "description": "Free-text note accompanying the example status.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

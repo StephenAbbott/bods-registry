@@ -1,0 +1,35 @@
+[
+  {
+    "statementId": "1c7d1f0e-3b2a-4a0e-9a4b-6d8f2c1e5a77",
+    "statementDate": "2026-09-26",
+    "declarationSubject": "example-entity-1",
+    "recordId": "example-entity-1",
+    "recordType": "entity",
+    "recordStatus": "new",
+    "recordDetails": {
+      "isComponent": false,
+      "entityType": {
+        "type": "registeredEntity",
+        "details": "Private company limited by shares"
+      },
+      "name": "Example Holdings Ltd",
+      "jurisdiction": { "name": "United Kingdom", "code": "GB" },
+      "identifiers": [
+        { "id": "00000000", "scheme": "GB-COH", "schemeName": "Companies House" }
+      ],
+      "templateExtension": {
+        "exampleStatus": "active",
+        "exampleNote": "Illustrative use of the template extension."
+      }
+    },
+    "publicationDetails": {
+      "publicationDate": "2026-09-26",
+      "bodsVersion": "0.4",
+      "publisher": { "name": "Example Publisher" }
+    },
+    "source": {
+      "type": ["officialRegister"],
+      "description": "Example source"
+    }
+  }
+]

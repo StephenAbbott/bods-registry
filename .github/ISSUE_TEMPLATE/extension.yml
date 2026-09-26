@@ -1,0 +1,69 @@
+name: Register an extension
+description: Ask for a documented BODS extension to be added to extensions/registry.json.
+title: "Extension: <extension name>"
+labels: ["extension"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Read the normative rules in `extensions/README.md` first. The registry lists extensions that follow the `extensions/TEMPLATE/` layout and are published at a stable URL.
+  - type: input
+    id: name
+    attributes:
+      label: Extension name
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Base URL of the extension
+      description: The directory that contains extension.json, README.md and schema/.
+    validations:
+      required: true
+  - type: input
+    id: maintainer
+    attributes:
+      label: Maintainer (organisation or person, and a URL)
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Compatible BODS version(s)
+      placeholder: "0.4"
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - assets
+        - documents
+        - projects
+        - payments
+        - sanctions
+        - agents
+        - political-exposure
+        - procurement
+        - verification
+        - identifiers
+        - other
+    validations:
+      required: true
+  - type: checkboxes
+    id: rules
+    attributes:
+      label: Conformance
+      options:
+        - label: The extension does not remove or redefine any core BODS field
+          required: true
+        - label: The extension does not add codes to a closed core codelist
+          required: true
+        - label: extension.json, README.md and schema/ are retrievable from the base URL
+          required: true
+  - type: textarea
+    id: users
+    attributes:
+      label: Who uses it?
+      description: Implementations that use this extension, with links.

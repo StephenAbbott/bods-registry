@@ -1,0 +1,62 @@
+name: Propose an implementation profile
+description: Tell us about an implementation of BODS so a profile can be drafted, or draft it yourself and open a pull request instead.
+title: "Profile: <implementation name>"
+labels: ["implementation-profile"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Profiles record how BODS is used in practice. Everything must be backed by **public** evidence. If you would rather write the profile yourself, copy `implementations/TEMPLATE.md` and open a pull request.
+  - type: input
+    id: name
+    attributes:
+      label: Implementation name
+      placeholder: e.g. Foster Moore Verne Beneficial Ownership
+    validations:
+      required: true
+  - type: input
+    id: organisation
+    attributes:
+      label: Organisation
+    validations:
+      required: true
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      options:
+        - national-register
+        - register-software
+        - data-publisher
+        - data-republisher
+        - data-user
+        - standard-or-spec
+        - tool
+    validations:
+      required: true
+  - type: dropdown
+    id: relationship
+    attributes:
+      label: Your relationship to it
+      options:
+        - I am the implementer
+        - Third party
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: BODS version(s)
+      placeholder: "0.4"
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Public evidence
+      description: Links to the register, repository, mapping, documentation, blog post or talk that shows BODS in use. One per line.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything extended, adapted or impossible to model?
+      description: Optional. Fields added, structure changed, concepts that did not fit.

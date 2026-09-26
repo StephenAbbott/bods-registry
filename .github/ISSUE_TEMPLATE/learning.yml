@@ -1,0 +1,51 @@
+name: Record a learning
+description: Something an implementation revealed about the BODS standard itself.
+title: "Learning: <one-line observation>"
+labels: ["learning"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A learning is one observation about the standard (not about a particular implementation's bugs), with evidence and a suggested change. A maintainer will turn this into a file under `learnings/` and link it to the upstream issue.
+  - type: textarea
+    id: observed
+    attributes:
+      label: What was observed
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area of the standard
+      options:
+        - schema
+        - codelist
+        - guidance
+        - documentation
+        - tooling
+        - governance
+        - serialisation
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it matters for the standard
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Suggested change (or "no change, but worth knowing")
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Public links, one per line.
+    validations:
+      required: true
+  - type: input
+    id: upstream
+    attributes:
+      label: Related openownership/data-standard issue, if any
+      placeholder: https://github.com/openownership/data-standard/issues/...

@@ -1,0 +1,19 @@
+{
+  "slug": "template-extension",
+  "name": "Template extension",
+  "description": "Copy this directory to start a new BODS extension. This example adds one namespaced object to entity records and one new codelist, and shows the file layout the registry expects.",
+  "maintainer": {
+    "name": "Your organisation",
+    "url": "https://example.org/"
+  },
+  "documentation_url": "https://example.org/bods-extensions/template-extension/",
+  "repository_url": "https://github.com/example/bods-template-extension",
+  "bods_versions": ["0.4"],
+  "category": "other",
+  "status": "draft",
+  "dependencies": [],
+  "schemas": ["entity-record.json"],
+  "codelists": ["exampleStatus.csv"],
+  "version": "0.1.0",
+  "first_registered": "2026-09-26"
+}
