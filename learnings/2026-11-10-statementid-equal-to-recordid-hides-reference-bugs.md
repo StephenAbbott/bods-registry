@@ -4,8 +4,9 @@ date: "2026-11-10"
 area: "guidance"
 source: ["opencheck"]
 bods_versions: ["0.4"]
-upstream_issues: []
-status: "needs-issue"
+upstream_issues:
+  - "https://github.com/openownership/data-standard/issues/776"
+status: "raised"
 summary: "A publisher that never versions records can make statementId equal recordId, and every consumer that joins relationship parties on statementId then works by accident until the first dataset that does not; the record-ids guidance should warn about this and give a test."
 ---
 
@@ -31,7 +32,7 @@ Add a note to the record identifiers page:
 - consumers MUST resolve relationship parties by `recordId`
 - test data SHOULD include statements whose `statementId` differs from their `recordId`
 
-Ideally, also add an example in the repository's `examples/` with distinct ids and a relationship that references one by `recordId`. Needs a new upstream issue.
+Ideally, also add an example in the repository's `examples/` with distinct ids and a relationship that references one by `recordId`. Raised upstream as [#776](https://github.com/openownership/data-standard/issues/776) on 10 Nov 2026.
 
 ## Evidence
 
@@ -39,3 +40,4 @@ Ideally, also add an example in the repository's `examples/` with distinct ids a
 - OpenCheck PR #479, the scramble harness — https://github.com/StephenAbbott/opencheck/pull/479 (2026-10-23)
 - OpenCheck PR #480, content-addressed statement ids — https://github.com/StephenAbbott/opencheck/pull/480 (2026-10-23)
 - BODS record identifiers guidance — https://standard.openownership.org/en/0.4.0/standard/modelling/record-ids.html (accessed 2026-11-10)
+- Issue #776, record identifiers guidance — https://github.com/openownership/data-standard/issues/776 (2026-11-10)
