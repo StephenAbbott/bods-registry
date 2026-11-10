@@ -16,10 +16,19 @@ upstream_issues:
   - "https://github.com/openownership/data-standard/issues/389"
   - "https://github.com/openownership/data-standard/issues/464"
   - "https://github.com/openownership/data-standard/issues/466"
+  - "https://github.com/openownership/data-standard/issues/769"
 learnings:
   - "2026-09-26-entity-subtype-is-a-closed-codelist.md"
+  - "2026-11-10-republisher-rollup-of-indirect-ownership.md"
+  - "2026-11-10-psc-natures-do-not-encode-directness.md"
+  - "2026-11-10-beneficial-ownership-flag-needs-a-not-stated-state.md"
+  - "2026-11-10-v03-unspecified-idiom-under-v04-stamp.md"
+  - "2026-11-10-annotations-dropped-by-exporters.md"
+  - "2026-11-10-statementid-equal-to-recordid-hides-reference-bugs.md"
+  - "2026-11-10-declaration-subject-for-republishers.md"
+  - "2026-11-10-libcovebods-checks-miss-relationship-annotations.md"
 author_relationship: "implementer"
-last_reviewed: "2026-09-26"
+last_reviewed: "2026-11-10"
 ---
 
 ## Summary
@@ -28,7 +37,7 @@ OpenCheck is an open-source customer due diligence tool that takes a Legal Entit
 
 ## How BODS is used
 
-BODS v0.4 is the internal data model and the export format. Each source adapter maps a register's own records to entity, person and relationship statements using shared factory functions; the assembled bundle is exported as JSON, JSON Lines, XML and RDF. Statement identifiers are deterministic (derived from source and local identifier) and `recordId` equals `statementId`, because OpenCheck never versions records itself; lifecycle semantics are emitted only where a source expresses them (for example a ceased UK PSC becomes a relationship with `recordStatus: "closed"` and an interest `endDate`). Cross-source entity resolution is a display-layer concern and does not alter the exported statements. The UK Companies House mapping is shared with [bods-stream](https://github.com/StephenAbbott/bods-stream) through the [bods-mapper](https://github.com/StephenAbbott/bods-mapper) library, which maps all 86 PSC `natures_of_control` codes to BODS interest types.
+BODS v0.4 is the internal data model and the export format. Each source adapter maps a register's own records to entity, person and relationship statements using shared factory functions; the assembled bundle is exported as JSON, JSON Lines, XML and RDF. `recordId` is deterministic (derived from source and local identifier) and, since October 2026, `statementId` is content-addressed (derived from the `recordId` and a digest of the record's content), so the two differ and a changed record gets a new `statementId`. Relationships reference parties by `recordId`. Each source bundle is a declared network whose `declarationSubject` is that source's own record of the looked-up company; lifecycle semantics are emitted only where a source expresses them (for example a ceased UK PSC becomes a relationship with `recordStatus: "closed"` and an interest `endDate`). Cross-source entity resolution is a display-layer concern and does not alter the exported statements. The UK Companies House mapping is shared with [bods-stream](https://github.com/StephenAbbott/bods-stream) through the [bods-mapper](https://github.com/StephenAbbott/bods-mapper) library, which maps all 86 PSC `natures_of_control` codes to BODS interest types.
 
 ## What was extended or adapted
 
@@ -46,9 +55,15 @@ No schema extension. Three adaptations of note, all visible in the repository:
 
 ## Learnings for the standard
 
-- `entityType.subtype` is a closed codelist and the natural home for a register's own wording is `entityType.details`; the documentation does not make this obvious enough to stop implementers getting it wrong. See [learnings/2026-09-26-entity-subtype-is-a-closed-codelist.md](../learnings/2026-09-26-entity-subtype-is-a-closed-codelist.md). Feeds a documentation fix and [#472](https://github.com/openownership/data-standard/issues/472).
-- The republisher roll-up pattern (a synthesised primary with `thirdParty` source and a `transformation` annotation) is a candidate for guidance under [#464](https://github.com/openownership/data-standard/issues/464) on republishing and provenance.
-- The three-state treatment of `beneficialOwnershipOrControl` is evidence for [#389](https://github.com/openownership/data-standard/issues/389) on representing missing information: "not stated" and "false" need to be distinguishable.
+- `entityType.subtype` is a closed codelist and a register's own wording belongs in `entityType.details`. See [the learning](../learnings/2026-09-26-entity-subtype-is-a-closed-codelist.md); raised as [#769](https://github.com/openownership/data-standard/issues/769) with [PR #770](https://github.com/openownership/data-standard/pull/770).
+- A republisher can synthesise the primary indirect relationship, but nothing says how to mark it as derived. See [the learning](../learnings/2026-11-10-republisher-rollup-of-indirect-ownership.md); feeds [#464](https://github.com/openownership/data-standard/issues/464).
+- UK PSC codes do not encode directness, so `directOrIndirect` must be `unknown`. See [the learning](../learnings/2026-11-10-psc-natures-do-not-encode-directness.md); feeds [#466](https://github.com/openownership/data-standard/issues/466).
+- An omitted `beneficialOwnershipOrControl` needs to mean "not stated". See [the learning](../learnings/2026-11-10-beneficial-ownership-flag-needs-a-not-stated-state.md); feeds [#389](https://github.com/openownership/data-standard/issues/389).
+- 0.3 missing-information idioms still circulate under a 0.4 stamp. See [the learning](../learnings/2026-11-10-v03-unspecified-idiom-under-v04-stamp.md); feeds #389.
+- Exporters drop annotations. See [the learning](../learnings/2026-11-10-annotations-dropped-by-exporters.md).
+- `statementId == recordId` hides consumers that join on the wrong id. See [the learning](../learnings/2026-11-10-statementid-equal-to-recordid-hides-reference-bugs.md).
+- `declarationSubject` is undefined for a republisher that merges sources. See [the learning](../learnings/2026-11-10-declaration-subject-for-republishers.md).
+- lib-cove-bods checks annotation pointers on entity statements only. See [the learning](../learnings/2026-11-10-libcovebods-checks-miss-relationship-annotations.md).
 - Mapping thirty source vocabularies onto the 23 interest types is a ready-made coverage test for any proposal under [#466](https://github.com/openownership/data-standard/issues/466).
 
 ## Sources

@@ -5,8 +5,10 @@ area: "documentation"
 source: ["opencheck"]
 bods_versions: ["0.4"]
 upstream_issues:
+  - "https://github.com/openownership/data-standard/issues/769"
+  - "https://github.com/openownership/data-standard/pull/770"
   - "https://github.com/openownership/data-standard/issues/472"
-status: "observed"
+status: "raised"
 summary: "Three independent register mappers put the register's own entity-type wording into the closed entityType.subtype codelist and failed schema validation; the reference should state, next to subtype, that free text goes in details, with a wrong/right example."
 ---
 
@@ -22,7 +24,7 @@ The mistake was not caught earlier because the adapters' schema tests validated 
 
 ## Suggested change
 
-A documentation fix, non-breaking: in the schema reference entry for `entityType` and on the entity-statement modelling page, add one sentence and a paired wrong/right JSON example showing a register's own label in `details` alongside a codelist value in `subtype`. Optionally, mention in `subtype`'s description that it is closed and that `details` exists. A candidate PR is tracked in the maintainer's backlog; the longer-term answer (a legal-form codelist, for example ISO 20275 entity legal forms) belongs to #472.
+A documentation fix, non-breaking: in the schema reference entry for `entityType` and on the entity-statement modelling page, add one sentence and a paired wrong/right JSON example showing a register's own label in `details` alongside a codelist value in `subtype`. Optionally, mention in `subtype`'s description that it is closed and that `details` exists. Raised upstream on 10 Nov 2026 as [#769](https://github.com/openownership/data-standard/issues/769), with [PR #770](https://github.com/openownership/data-standard/pull/770) adding the paragraph and examples under the Entity Subtype codelist; the longer-term answer (a legal-form codelist, for example ISO 20275 entity legal forms) belongs to #472.
 
 ## Evidence
 
@@ -30,3 +32,4 @@ A documentation fix, non-breaking: in the schema reference entry for `entityType
 - BODS 0.4 schema, `entity-record.json`, `entityType.subtype` enum and `details` description — https://github.com/openownership/data-standard/blob/main/schema/entity-record.json (accessed 2026-09-26)
 - BODS schema reference, Entity Type / Entity Subtype — https://standard.openownership.org/en/main/standard/reference.html (accessed 2026-09-26)
 - Issue #472, Feature: update to the entity classification system — https://github.com/openownership/data-standard/issues/472 (accessed 2026-09-26)
+- Issue #769 and PR #770, the documentation fix — https://github.com/openownership/data-standard/issues/769 (2026-11-10)
