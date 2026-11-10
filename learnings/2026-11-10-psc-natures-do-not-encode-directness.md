@@ -14,7 +14,7 @@ summary: "Every Companies House PSC condition is met by holding an interest 'dir
 
 OpenCheck's Companies House mapper first emitted `directOrIndirect: "direct"` for every PSC interest, because that is the natural reading of "a person with significant control". In September 2026 it was changed to `"unknown"` ([PR #233](https://github.com/StephenAbbott/opencheck/pull/233)). Each PSC condition in Schedule 1A to the Companies Act 2006 is met by holding the interest "directly or indirectly", and none of the 86 `natures_of_control` codes says which. The BODS modelling guidance says that where directness is not known, `directOrIndirect` MUST be `unknown`.
 
-The same over-assertion is easy to make and easy to miss. On 10 Nov 2026 the shared [bods-mapper](https://github.com/StephenAbbott/bods-mapper) library, which another pipeline uses for the same mapping, still writes `"direct"`.
+The same over-assertion is easy to make and easy to miss. On 10 Nov 2026 the shared [bods-mapper](https://github.com/StephenAbbott/bods-mapper) library, which another pipeline uses for the same mapping, still wrote `"direct"`. That is corrected in [bods-mapper PR #2](https://github.com/StephenAbbott/bods-mapper/pull/2).
 
 ## Why it matters for the standard
 
@@ -30,3 +30,4 @@ Short term: the UK PSC mapping notes and any published PSC → BODS mapping shou
 - OpenCheck PR #233 — https://github.com/StephenAbbott/opencheck/pull/233 (2026-09-08)
 - bods-mapper `parse_nature` writing "direct" — https://github.com/StephenAbbott/bods-mapper/blob/main/src/bods_mapper/natures.py (accessed 2026-11-10)
 - Companies Act 2006, Schedule 1A — https://www.legislation.gov.uk/ukpga/2006/46/schedule/1A
+- bods-mapper PR #2, directness set to unknown — https://github.com/StephenAbbott/bods-mapper/pull/2 (2026-11-10)
