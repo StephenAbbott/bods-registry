@@ -6,7 +6,8 @@ source: []
 bods_versions: ["0.4"]
 upstream_issues:
   - "https://github.com/openownership/data-standard/issues/752"
-status: "observed"
+  - "https://github.com/openownership/data-standard/issues/752#issuecomment-7115824286"
+status: "raised"
 summary: "Of the 38 information items in the OECD's agreement on exchanging real estate information, BODS 0.4 carries 16 of the 17 about people and entities and none of the 21 about the asset; the nine in-scope asset items split into three about the asset and six about the holder's link to it, which have the shape of a BODS interest, and an entity's tax residence has no field."
 ---
 
